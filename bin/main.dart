@@ -26,7 +26,9 @@ List flattenList(List list) {
             flatList.add(y);
           }
         }
-        flatList.add(x);
+        else{
+          flatList.add(x);
+        }
       } on Exception catch (e) {
         rethrow;
       }
@@ -46,7 +48,7 @@ List flattenList(List list) {
     else {
       flatList.add(x);
     }
-    
+
   }
   return flatList;
 }
