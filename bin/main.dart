@@ -29,7 +29,7 @@ List flattenList(List list) {
         else{
           flatList.add(x);
         }
-      } on Exception catch (e) {
+      } on Exception catch (error) {
         rethrow;
       }
     }
