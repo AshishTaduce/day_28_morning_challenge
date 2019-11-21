@@ -10,45 +10,21 @@
 // flattenList([1, "2", [3, function () { return 4; }, [ "five" ], "six", true, { prop: "val" }]])
 //  ➞ [1, "2", 3, 4, "five", "six", true, { prop: "val" }]
 
-callFunc(Function x){
-  return x;
-}
-
 List flattenList(List list) {
   List <dynamic> flatList = [];
-  List tempList = [];
-  for (var x in list) {
+  for (dynamic x in list) {
     if (x is Function) {
-      try {
-        if (callFunc(x) is List){
-          tempList = (callFunc(x));
-          for (var y in tempList) {
-            flatList.add(y);
-          }
-        }
-        else{
-          flatList.add(x);
-        }
-      } on Exception catch (error) {
-        rethrow;
-      }
+       flatList.add(x());
     }
-
     else if (x is String) {
       flatList.add('"$x"');
     }
-
     else if (x is List) {
-      tempList = flattenList(x);
-      for (var y in tempList) {
-        flatList.add(y);
-      }
+        flatList.add(flattenList(x));
     }
-
     else {
       flatList.add(x);
     }
-
   }
   return flatList;
 }
@@ -59,6 +35,7 @@ function() {
 
 main() {
   var prop = 'prop';
-  List list = [1, "2", [3, function(), [ "five" ], "six", true, { prop: "val" }]];
+  List list = [1, "2", [3, function, [ "five" ], "six", true, { prop: "val" }]];
+  print(list[2][1]());
   print(flattenList(list));
 }
