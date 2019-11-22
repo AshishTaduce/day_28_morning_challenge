@@ -9,7 +9,6 @@
 // Example
 // flattenList([1, "2", [3, function () { return 4; }, [ "five" ], "six", true, { prop: "val" }]])
 //  ➞ [1, "2", 3, 4, "five", "six", true, { prop: "val" }]
-//TODO test cases
 
 List flattenList(List list) {
   List <dynamic> flatList = [];
