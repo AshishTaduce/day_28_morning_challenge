@@ -9,6 +9,7 @@
 // Example
 // flattenList([1, "2", [3, function () { return 4; }, [ "five" ], "six", true, { prop: "val" }]])
 //  ➞ [1, "2", 3, 4, "five", "six", true, { prop: "val" }]
+//TODO test cases
 
 List flattenList(List list) {
   List <dynamic> flatList = [];
@@ -17,10 +18,10 @@ List flattenList(List list) {
        flatList.add(x());
     }
     else if (x is String) {
-      flatList.add('"$x"');
+      flatList.add('$x');
     }
     else if (x is List) {
-        flatList.add(flattenList(x));
+        flatList.addAll(flattenList(x));
     }
     else {
       flatList.add(x);
@@ -30,7 +31,7 @@ List flattenList(List list) {
 }
 
 function() {
-  return [0, 7, "six"];
+  return 4;
 }
 
 main() {

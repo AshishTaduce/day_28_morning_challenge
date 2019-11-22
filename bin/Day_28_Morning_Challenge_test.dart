@@ -6,7 +6,42 @@ function() {
 }
 
 void main() {
-  var prop;
-  test('Check for list within flat List', () {
+  test('test', (){
+    expect(
+        flattenList([[2], 2, [2]]), [2, 2, 2]);
+    expect(
+        flattenList([1, "2", [3, function, ["five"], "six", true, {'prop': "val"}]], ),
+        [
+          1,
+          "2",
+          3,
+          4,
+          "five",
+          "six",
+          true,
+          {'prop': "val"}]);
+    expect(
+        flattenList([
+          1,
+          "2",
+          [
+            3,
+                () =>[2,[4]],
+            ["five"],
+            "six",
+            true,
+            {'prop': "val"}
+          ]
+        ], ),
+        [
+          1,
+          "2",
+          3,
+          [2,[4]],
+          "five",
+          "six",
+          true,
+          {'prop': "val"}
+        ]);
   });
 }
