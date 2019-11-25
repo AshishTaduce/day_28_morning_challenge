@@ -10,17 +10,19 @@
 // flattenList([1, "2", [3, function () { return 4; }, [ "five" ], "six", true, { prop: "val" }]])
 //  ➞ [1, "2", 3, 4, "five", "six", true, { prop: "val" }]
 
-List flattenList(List list) {
+List flattenList(List<dynamic> list) {
   List <dynamic> flatList = [];
   for (dynamic x in list) {
     if (x is Function) {
-       flatList.add(x());
+      dynamic func = x();
+      flatList.addAll(flattenList([func]));
     }
     else if (x is String) {
       flatList.add('$x');
     }
     else if (x is List) {
-        flatList.addAll(flattenList(x));
+      print(x);
+      flatList.addAll(flattenList(x));
     }
     else {
       flatList.add(x);

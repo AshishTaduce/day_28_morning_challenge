@@ -1,4 +1,5 @@
 import 'package:test/test.dart';
+
 import 'main.dart';
 
 function() {
@@ -6,14 +7,27 @@ function() {
 }
 
 void main() {
-  test('test', (){
+  test('test', () {
     expect(
-        flattenList([1, [2]]), [1, 2]);
+        flattenList([
+          1,
+          [2]
+        ]),
+        [1, 2]);
+
     expect(
-        flattenList([1, "2", [3, function, [ "five" ], "six", true, { 'prop': "val" }]]), [1, "2", 3, 4, "five", "six", true, { 'prop': "val" }]
-    );
-    expect(
-        flattenList([1, "2", [3, function, ["five"], "six", true, {'prop': "val"}]], ),
+        flattenList([
+          1,
+          "2",
+          [
+            3,
+            function,
+            ["five"],
+            "six",
+            true,
+            {'prop': "val"}
+          ]
+        ]),
         [
           1,
           "2",
@@ -22,25 +36,60 @@ void main() {
           "five",
           "six",
           true,
-          {'prop': "val"}]);
+          {'prop': "val"}
+        ]);
+
     expect(
-        flattenList([
-          1,
-          "2",
+        flattenList(
           [
-            3,
-                () =>[2,[4]],
-            ["five"],
-            "six",
-            true,
-            {'prop': "val"}
-          ]
-        ], ),
+            1,
+            "2",
+            [
+              3,
+              function,
+              ["five"],
+              "six",
+              true,
+              {'prop': "val"}
+            ]
+          ],
+        ),
         [
           1,
           "2",
           3,
-          [2,[4]],
+          4,
+          "five",
+          "six",
+          true,
+          {'prop': "val"}
+        ]);
+
+    expect(
+        flattenList(
+          [
+            1,
+            "2",
+            [
+              3,
+                  () =>
+              [
+                2,
+                [4]
+              ],
+              ["five"],
+              "six",
+              true,
+              {'prop': "val"}
+            ]
+          ],
+        ),
+        [
+          1,
+          "2",
+          3,
+          2,
+          4,
           "five",
           "six",
           true,
